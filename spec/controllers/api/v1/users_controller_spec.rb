@@ -96,4 +96,13 @@ describe Api::V1::UsersController do
     end
   end
 
+  describe "DELETE #destroy" do
+    let(:user) { FactoryGirl.create :user }
+    before(:each) do
+      delete :destroy, { id: user.id }, format: :json
+    end
+
+    it { is_expected.to respond_with 204 }
+  end
+
 end
