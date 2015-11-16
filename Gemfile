@@ -56,4 +56,11 @@ gem 'bcrypt', '~> 3.1.7'
 # gem 'capistrano', group: :development
 
 # Use debugger
-# gem 'debugger', group: [:development, :test]
+gem 'byebug', group: [:development, :test]
+
+gem 'sabisu_rails', github: "IcaliaLabs/sabisu-rails"
+gem 'compass-rails', '1.1.7'
+gem 'furatto'
+gem 'font-awesome-rails'
+gem 'simple_form'
+
