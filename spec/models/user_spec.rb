@@ -14,4 +14,9 @@ describe User do
   # it { is_expected.to validate_uniqueness_of(:email) } # commented out because of a bug in shoulda matcher with devise
   it { is_expected.to validate_confirmation_of(:password) }
   it { is_expected.to allow_value('example@domain.com').for(:email) }
+
+  # test the user actually respond to this attribute
+  it { is_expected.to respond_to(:auth_token) }
+
+  it { is_expected.to validate_uniqueness_of(:auth_token) }
 end
