@@ -60,6 +60,7 @@ describe Api::V1::UsersController do
 
       let(:user) { FactoryGirl.create :user }
       before(:each) do
+        api_authorization_header(user.auth_token)
         patch :update, { id: user.id,
                          user: { email: "newmail@example.com" } }
       end
@@ -76,6 +77,7 @@ describe Api::V1::UsersController do
 
       let(:user) { FactoryGirl.create :user }
       before(:each) do
+        api_authorization_header(user.auth_token)
         patch :update, { id: user.id,
                          user: { email: "bademail.com" } }
       end
@@ -97,6 +99,7 @@ describe Api::V1::UsersController do
   describe "DELETE #destroy" do
     let(:user) { FactoryGirl.create :user }
     before(:each) do
+      api_authorization_header(user.auth_token)
       delete :destroy, { id: user.id }
     end
 
