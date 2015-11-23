@@ -33,4 +33,22 @@ describe User do
       expect(user.auth_token).not_to eql existing_user.auth_token
     end
   end
+
+  it { is_expected.to have_many :products }
+
+  describe "#products associations" do
+
+    before do
+      user.save
+      3.times {FactoryGirl.create :product, user: user}
+    end
+
+    it "destroys the associated products on self destruct" do
+      products = user.products
+      user.destroy
+      products.each do |product|
+        expect(Product.find(product)).to raise_error ActiveRecord::RecordNotFound
+      end
+    end
+  end
 end
