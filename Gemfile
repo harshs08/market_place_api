@@ -36,11 +36,14 @@ group :development do
   gem 'sqlite3'
 end
 
+group :development, :test do
+  gem "factory_girl_rails"
+  gem 'ffaker'
+end
+
 group :test do
   gem 'test-unit'
   gem 'rspec-rails', '~> 2.14'
-  gem 'factory_girl_rails'
-  gem 'ffaker'
   gem 'shoulda-matchers', '~> 3.0'
 end
 
