@@ -25,7 +25,7 @@ gem 'jquery-rails'
 # gem 'jbuilder', '~> 1.2'
 
 #Api gems
-gem 'active_model_serializers'
+gem 'active_model_serializers', '0.8.3'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
