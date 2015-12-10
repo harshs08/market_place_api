@@ -14,6 +14,11 @@ describe Api::V1::ProductsController do
     end
 
     it { is_expected.to respond_with 200 }
+
+    it "return the user object into each product" do
+      product_response = json_response[:product]
+      expect(product_response[:user][:email]).to eq product.user.email
+    end
   end
 
   describe "GET #index" do
@@ -23,11 +28,18 @@ describe Api::V1::ProductsController do
     end
 
     it "returns 4 records from the database" do
-      product_reponse = json_response
-      expect(product_reponse[:products].count).to eq(4)
+      products_response = json_response[:products]
+      expect(products_response.count).to eq(4)
     end
 
     it { is_expected.to respond_with 200 }
+
+    it "returns the user object into each product" do
+      products_response = json_response[:products]
+      products_response.each do |product_response|
+        expect(product_response[:user]).to be_present
+      end
+    end
   end
 
   describe "POST #create" do
