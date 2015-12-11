@@ -17,4 +17,20 @@ describe Api::V1::OrdersController do
     it { is_expected.to respond_with 200 }
   end
 
+  describe "GET #show" do
+    let(:current_user) { FactoryGirl.create :user }
+    let(:order) { FactoryGirl.create :order, user: current_user }
+    before(:each) do
+      api_authorization_header current_user.auth_token
+      get :show, user_id: current_user.id, id: order.id
+    end
+
+    it "returns the order matching the id" do
+      order_response = json_response[:order]
+      expect(order_response[:id]).to eql order.id
+    end
+
+    it { is_expected.to respond_with 200 }
+  end
+
 end
