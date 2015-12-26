@@ -45,6 +45,7 @@ group :test do
   gem 'test-unit'
   gem 'rspec-rails', '~> 2.14'
   gem 'shoulda-matchers', '~> 3.0'
+  gem "email_spec"
 end
 
 gem 'devise'

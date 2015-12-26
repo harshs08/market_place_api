@@ -72,12 +72,15 @@ RSpec.configure do |config|
   end
 
   Shoulda::Matchers.configure do |config|
-  config.integrate do |with|
-    # Choose a test framework:
-    with.test_framework :rspec
-    with.test_framework :test_unit
+    config.integrate do |with|
+      # Choose a test framework:
+      with.test_framework :rspec
+      with.test_framework :test_unit
 
-    with.library :rails
+      with.library :rails
+    end
   end
-end
+
+  config.include EmailSpec::Helpers
+  config.include EmailSpec::Matchers
 end
