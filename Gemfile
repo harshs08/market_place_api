@@ -59,6 +59,7 @@ gem 'bcrypt', '~> 3.1.7'
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
 gem 'kaminari'
+gem 'delayed_job_active_record', '~> 4.1'
 
 # Use debugger
 gem 'byebug', group: [:development, :test]
