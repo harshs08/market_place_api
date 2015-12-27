@@ -32,12 +32,34 @@ describe Api::V1::ProductsController do
       expect(products_response.count).to eq(4)
     end
 
-    it { is_expected.to respond_with 200 }
-
     it "returns the user object into each product" do
       products_response = json_response[:products]
       products_response.each do |product_response|
         expect(product_response[:user]).to be_present
+      end
+    end
+
+    it { expect(json_response).to have_key(:meta) }
+    it { expect(json_response[:meta]).to have_key(:pagination) }
+    it { expect(json_response[:meta][:pagination]).to have_key(:per_page) }
+    it { expect(json_response[:meta][:pagination]).to have_key(:total_pages) }
+    it { expect(json_response[:meta][:pagination]).to have_key(:total_objects) }
+
+    it { is_expected.to respond_with 200 }
+
+    context "when product_ids parameter is sent" do
+      let(:user) { FactoryGirl.create :user}
+      before(:each) do
+        3.times { FactoryGirl.create :product, user: user }
+        get :index, product_ids: user.product_ids
+      end
+
+      it "returns just the products that belong to the user" do
+        products_response = json_response[:products]
+
+        products_response.each do |product_response|
+          expect(product_response[:user][:email]).to eql user.email
+        end
       end
     end
   end
